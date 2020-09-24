@@ -7,7 +7,9 @@
 Dictionary:
 x, y - inputs
 result - cached operation result
-grad - gradinet from previous result}
+grad - gradinet from previous result
+TODO: check and maybe document each derivative?
+What about The Book of Derivatives?}
 \usage{
 vec_arith.aria_tensor(op, x, y, ...)
 }
@@ -18,4 +20,6 @@ Dictionary:
 x, y - inputs
 result - cached operation result
 grad - gradinet from previous result
+TODO: check and maybe document each derivative?
+What about The Book of Derivatives?
 }

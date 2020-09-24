@@ -7,7 +7,8 @@
     dims  = dims,
     grad  = NULL,
     xptr  = xptr::null_xptr(),
-    requires_grad = requires_grad
+    requires_grad = requires_grad,
+    scope = NULL
   )
 
   .tensor <-  new_vctr(

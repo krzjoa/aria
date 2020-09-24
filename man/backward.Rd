@@ -36,13 +36,6 @@ bkw_fun <- get_inputs(y)[[1]]
 get_paired_object(bkw_fun)
 all.ops <- get_all_ops_ptr(ctx)
 backward(y, 1)
-TODO: sposób iteacji - obecnie idziemy jak najbardziej wgłąb
+TODO: sposób iteracji - obecnie idziemy jak najbardziej wgłąb
 TODO: powstają jakieś niezamiezone kopie tensorów - gdzie i kiedy?
-For simplicity, suppose we have only
-one sequence of operations
-if (!inherits(ops, "cpu_tensor"))
-  stop("Error!")
-For every input to the function
-1. Find all the argumnets
-2. Get matching function
 }

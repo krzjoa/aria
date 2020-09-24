@@ -4,15 +4,13 @@
 #' x, y - inputs
 #' result - cached operation result
 #' grad - gradinet from previous result
+#' TODO: check and maybe document each derivative?
+#' What about The Book of Derivatives?
 
 #' @export
 vec_arith.aria_tensor <- function(op, x, y, ...) {
   UseMethod("vec_arith.aria_tensor", y)
 }
-
-# =============================================================================================== #
-#                                         TENSOR - TENSOR                                         #
-# =============================================================================================== #
 
 #' Abstract function for tensor-numeric operations
 #' Backward function rather than partial derivative?
@@ -111,6 +109,38 @@ vec_arith.aria_tensor <- function(op, x, y, ...) {
   .abstract_operator(.power, .power_deriv, x, y)
 }
 
+#' ============================================================== #
+#'                              MODULO                            #
+#' ============================================================== #
+
+.modulo <- function(x, y) x ** y
+.modulo_deriv <- list(
+  x = function(x, y, result, grad) grad,
+  y = function(x, y, result, grad) -grad * floor(x/y)
+)
+
+.arith_modulo <- function(x, y){
+  .abstract_operator(.modulo, .modulo_deriv, x, y)
+}
+
+#' ============================================================== #
+#'                          REMAINDER                             #
+#' ============================================================== #
+
+.remainder <- function(x, y) x ** y
+.remainder_deriv <- list(
+  x = function(x, y, result, grad) grad,
+  y = function(x, y, result, grad) -grad * floor(x/y)
+)
+
+.arith_remainder <- function(x, y){
+  .abstract_operator(.remainder, .remainder_deriv, x, y)
+}
+
+# =============================================================================================== #
+#                                         TENSOR - TENSOR                                         #
+# =============================================================================================== #
+
 #' @export
 vec_arith.aria_tensor.aria_tensor <- function(op, x, y, ...) {
   switch(op,
@@ -119,9 +149,8 @@ vec_arith.aria_tensor.aria_tensor <- function(op, x, y, ...) {
          `*`  = .arith_multiplication(x, y),
          `/`  = .arith_division(x, y),
          `^`  = .arith_power(x, y),
-         # TODO:
-         `%%` = .arith_power(x, y),
-         `%/%` =.arith_power(x, y),
+         `%%` = .arith_modulo(x, y),
+         `%/%` =.arith_remainder(x, y),
          stop_incompatible_op(op, x, y)
   )
 }
@@ -131,25 +160,21 @@ vec_arith.aria_tensor.aria_tensor <- function(op, x, y, ...) {
 # =============================================================================================== #
 #' @export
 vec_arith.numeric.aria_tensor <- function(op, x, y, ...) {
-  x <- scalar(x)
-  .Primitive(op)(x, y)
+  .Primitive(op)(scalar(x), y)
 }
 #' @export
 vec_arith.double.aria_tensor <- function(op, x, y, ...) {
-  x <- scalar(x)
-  .Primitive(op)(x, y)
+  .Primitive(op)(scalar(x), y)
 }
 # =============================================================================================== #
 #                                        TENSOR - NUMERIC                                         #
 # =============================================================================================== #
 #' @export
 vec_arith.aria_tensor.numeric <- function(op, x, y, ...) {
-  y <- scalar(y)
-  .Primitive(op)(x, y)
+  .Primitive(op)(x, scalar(y))
 }
 #' @export
 vec_arith.aria_tensor.double <- function(op, x, y, ...) {
-  y <- scalar(y)
-  .Primitive(op)(x, y)
+  .Primitive(op)(x, scalar(y))
 }
 

@@ -5,7 +5,7 @@
 \title{Create an operation inside the context.
 It may be a tensor or a function}
 \usage{
-register_ops(ctx, r.ops, paired.ops = NULL)
+register_ops(ctx, r_ops, paired_ops = NULL)
 }
 \description{
 Create an operation inside the context.
