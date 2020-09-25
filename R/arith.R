@@ -113,7 +113,7 @@ vec_arith.aria_tensor <- function(op, x, y, ...) {
 #'                              MODULO                            #
 #' ============================================================== #
 
-.modulo <- function(x, y) x ** y
+.modulo <- function(x, y) x %% y
 .modulo_deriv <- list(
   x = function(x, y, result, grad) grad,
   y = function(x, y, result, grad) -grad * floor(x/y)
@@ -127,7 +127,7 @@ vec_arith.aria_tensor <- function(op, x, y, ...) {
 #'                          REMAINDER                             #
 #' ============================================================== #
 
-.remainder <- function(x, y) x ** y
+.remainder <- function(x, y) x %/% y
 .remainder_deriv <- list(
   x = function(x, y, result, grad) grad,
   y = function(x, y, result, grad) -grad * floor(x/y)

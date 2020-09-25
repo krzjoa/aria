@@ -31,6 +31,6 @@ plot.aria_adjacency_matrix<- function(adj_mat){
 }
 
 # TODO: rename etc.
-plot.dlr_context <- function(ctx){
+plot.aria_context <- function(ctx){
   plot(adjacency_matrix(ctx))
 }

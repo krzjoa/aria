@@ -17,7 +17,7 @@
 #'
 #' We need to propagate information, if gradient is required or not
 #' @examples
-#' library(dlr)
+#' library(aria)
 #' ctx <- get_context()
 #' register_ops(ctx, cars)
 #' register_ops(ctx, data.frame)

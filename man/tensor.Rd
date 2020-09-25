@@ -2,11 +2,21 @@
 % Please edit documentation in R/tensor.R
 \name{tensor}
 \alias{tensor}
-\alias{.abstract_tensor}
-\title{Abstract tensor}
+\title{Create `aria` tensor of arbitrary shapes}
 \usage{
-.abstract_tensor(data, dims, grad, .class, requires_grad)
+tensor(data, dims, requires_grad = FALSE)
+}
+\arguments{
+\item{data}{numeric vector, array or data.frame}
+
+\item{dims}{Dimensions}
+
+\item{requires_grad}{is gradient required; logical}
 }
 \description{
-Abstract tensor
+Tensor abstraction, an interface for CPU and CUDA tensors.
+}
+\examples{
+library(aria)
+x <- tensor(1:30, c(3, 10))
 }
